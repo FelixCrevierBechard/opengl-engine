@@ -120,6 +120,37 @@ int main() {
 			 -.5f, -.5f,  -.5f,	1.f, 1.f,
 			  .5f, -.5f,  -.5f,	0.f, 1.f,
 		};
+		GLfloat uv[]{
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+		};
 		GLuint indices[] = {
 			//north
 			0, 1, 2,
@@ -141,7 +172,9 @@ int main() {
 			22, 23, 20
 		};
 
-		VAO vao;
+		GameObject object("Block", block, uv, 48, indices);
+
+		/*VAO vao;
 		EBO ebo(indices, 36);
 		VBO vbo(block, sizeof(block));
 		VBL layout;
@@ -149,7 +182,7 @@ int main() {
 		layout.Push<float>(2);
 		vao.AddBuffer(vbo, layout);
 		vbo.Unbind();
-		vao.Unbind();
+		vao.Unbind();*/
 		
 
 		Texture texture1("wall.jpg");
@@ -197,7 +230,7 @@ int main() {
 				model = glm::translate(model, pos);
 				shader.setMat4("model", model);
 
-				renderer.Draw(vao, ebo, shader);
+				renderer.Draw(object, shader);
 			}
 
 			glfwSwapBuffers(window);

@@ -60,10 +60,11 @@ public:
 	const char* Name;
 	Transform Transform;
 	Mesh Mesh;
-	VAO Vao;
-	VBO Vbo;
-	EBO Ebo;
 
-	GameObject(const char* name, const float* vertices, const float* uv, const unsigned int* indices);
+	VAO Vao;
+	EBO Ebo;
+	VBO Vbo;
+
+	GameObject(const char* name, const float* vertices, const float* uv, unsigned int uvCount, const unsigned int* indices);
 };
 
