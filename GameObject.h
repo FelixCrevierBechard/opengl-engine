@@ -1,5 +1,9 @@
 #pragma once
 
+#include "VAO.h"
+#include "VBO.h"
+#include "EBO.h"
+
 #include <glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
 #include<vector>
@@ -11,7 +15,7 @@ struct Transform
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::vec3 position;
 	glm::vec3 rotation;
-	glm::vec3 scale = {0, 0, 0};
+	glm::vec3 scale;
 
 	void Move(glm::vec3 position) {
 		model = glm::translate(model, position);
@@ -46,31 +50,8 @@ struct Transform
 struct Mesh
 {
 	const float* vertices;	
-	const unsigned int* triangles;
 	const float* uv;
-
-	const float* VerticesUvParseVBO() const {
-		const unsigned int uvOffset = 3;
-		const unsigned int stride = 5;
-		unsigned int count = (sizeof(vertices) / sizeof(vertices[0])) + (sizeof(uv) / sizeof(uv[0]));
-
-		std::vector<float> parsed;
-
-		unsigned int v = 0;
-		unsigned int u = 0;
-		for (unsigned int i = 0; i < count; ++i) {
-			unsigned int j = stride % i;
-			if (j < uvOffset) {
-				parsed.push_back(vertices[v]);
-				++v;
-				continue;
-			}
-			parsed.push_back(uv[u]);
-			++u;
-		}
-
-		return parsed.data();
-	}
+	const unsigned int* indices;
 };
 
 class GameObject
@@ -79,5 +60,10 @@ public:
 	const char* Name;
 	Transform Transform;
 	Mesh Mesh;
+	VAO Vao;
+	VBO Vbo;
+	EBO Ebo;
+
+	GameObject(const char* name, const float* vertices, const float* uv, const unsigned int* indices);
 };
 

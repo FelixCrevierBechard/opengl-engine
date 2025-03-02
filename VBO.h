@@ -6,6 +6,7 @@ private:
 	unsigned int m_rendererID;
 public:
 	VBO(const void* data, unsigned int size);
+	VBO();
 	~VBO();
 
 	void Bind() const;

@@ -22,3 +22,12 @@ void Renderer::Draw(const VAO& vao, const EBO& ebo, const Shader& shader) const
 	glDrawElements(GL_TRIANGLES, ebo.GetCount(), GL_UNSIGNED_INT, nullptr);
 	vao.Unbind();
 }
+
+void Renderer::Draw(GameObject& gameObject, Shader& shader) const
+{
+	shader.use();
+	gameObject.Vao.Bind();
+	gameObject.Ebo.Bind();
+	glDrawElements(GL_TRIANGLES, gameObject.Ebo.GetCount(), GL_UNSIGNED_INT, nullptr);
+	gameObject.Vao.Unbind();
+}
