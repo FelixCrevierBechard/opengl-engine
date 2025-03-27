@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\MinecraftCPP\MinecraftCPP\libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\MinecraftCPP\MinecraftCPP\libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\MinecraftCPP\opengl-engine\libraries\include;C:\MinecraftCPP\MinecraftCPP\libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\MinecraftCPP\opengl-engine\libraries\lib;C:\MinecraftCPP\MinecraftCPP\libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\MinecraftCPP\opengl-engine\libraries\include;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\MinecraftCPP\opengl-engine\libraries\lib;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -84,6 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,6 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
