@@ -8,6 +8,10 @@ VBO::VBO(const void* data, unsigned int size)
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_rendererID));
 	GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 }
+VBO::VBO()
+{
+	GLCall(glGenBuffers(1, &m_rendererID));
+}
 
 VBO::~VBO()
 {

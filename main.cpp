@@ -4,7 +4,7 @@
 #include<GLFW/glfw3.h>
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
-#include<glm/gtc/type_ptr.hpp>è
+#include<glm/gtc/type_ptr.hpp>ï¿½
 
 #include"Renderer.h"
 #include"stb_image.h"
@@ -29,7 +29,7 @@ int main() {
 	InitGlfw();
 
 	//InitWindow
-	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
+	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -114,6 +114,37 @@ int main() {
 			 -.5f, -.5f,   .5f,	1.f, 0.f,
 			 -.5f, -.5f,  -.5f,	1.f, 1.f,
 			  .5f, -.5f,  -.5f,	0.f, 1.f,
+		};
+		GLfloat uv[]{
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
+
+			0.f, 0.f,
+			1.f, 0.f,
+			1.f, 1.f,
+			0.f, 1.f,
 		};
 		GLuint indices[] = {
 			//north

@@ -30,6 +30,20 @@ void VAO::AddBuffer(const VBO& vbo, const VBL& layout) const
 	}
 }
 
+void VAO::AddBuffer(const VBO& vbo, const void* vertices, const void* uv) const
+{
+	Bind();
+	vbo.Bind();
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) + sizeof(uv), NULL, GL_STATIC_DRAW);
+
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+	glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices), sizeof(uv), uv);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)(0));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)sizeof(vertices));
+}
+
 void VAO::Bind() const
 {
 	glBindVertexArray(m_rendererID);
