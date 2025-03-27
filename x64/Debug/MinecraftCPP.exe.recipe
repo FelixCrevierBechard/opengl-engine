@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\MinecraftCPP\MinecraftCPP\x64\Debug\MinecraftCPP.exe</FullPath>
+      <FullPath>C:\MinecraftCPP\opengl-engine\x64\Debug\MinecraftCPP.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

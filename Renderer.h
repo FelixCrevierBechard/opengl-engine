@@ -7,6 +7,7 @@
 #include"VAO.h"
 #include"EBO.h"
 #include"Shader.h"
+#include"GameObject.h"
 
 #define ASSERT(x) if(!(x)) __debugbreak();
 #define GLCall(x) GLClearError();\
@@ -20,5 +21,6 @@ class Renderer
 {
 public:
 	void Draw(const VAO& vao, const EBO& ebo, const Shader& shader) const;
+	void Draw(const GameObject& gameObject, Shader& shader) const;
 };
 

@@ -10,9 +10,6 @@
 #include"stb_image.h"
 #include"Camera.h"
 #include"Texture.h"
-//#include"Block.h"
-//#include"Chunk.h"
-//#include"Perlin.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -39,25 +36,23 @@ int main() {
 		glfwTerminate();
 	}
 	glfwMakeContextCurrent(window);
+
 	gladLoadGL();
 
 	glfwSetCursorPosCallback(window, mouse_callback);
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSwapInterval(1);
+	glfwSwapInterval(1); //60 fps so our gpu doesnt explode
 
 	//HadleViewport
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-
-	Shader shader("./shader.vert_s", "./shader.frag_s");
-
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-
 	glFrontFace(GL_CCW);
+
+	Shader shader("./shader.vert_s", "./shader.frag_s");
 
 	{
 		glm::vec3 positions[] = {
@@ -150,6 +145,8 @@ int main() {
 		vao.AddBuffer(vbo, layout);
 		vbo.Unbind();
 		vao.Unbind();
+
+		GameObject cube(vao, ebo);
 		
 
 		Texture texture1("wall.jpg");
@@ -197,7 +194,7 @@ int main() {
 				model = glm::translate(model, pos);
 				shader.setMat4("model", model);
 
-				renderer.Draw(vao, ebo, shader);
+				renderer.Draw(cube, shader);
 			}
 
 			glfwSwapBuffers(window);
