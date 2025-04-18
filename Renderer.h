@@ -21,6 +21,6 @@ class Renderer
 {
 public:
 	void Draw(const VAO& vao, const EBO& ebo, const Shader& shader) const;
-	void Draw(const GameObject& gameObject, Shader& shader) const;
+	void Draw(GameObject& gameObject, Shader& shader) const;
 };
 

@@ -23,11 +23,14 @@ void Renderer::Draw(const VAO& vao, const EBO& ebo, const Shader& shader) const
 	vao.Unbind();
 }
 
-void Renderer::Draw(const GameObject& gameObject, Shader& shader) const
+void Renderer::Draw(GameObject& gameObject, Shader& shader) const
 {
 	shader.use();
-	gameObject.Vao.Bind();
-	gameObject.Ebo.Bind();
-	glDrawElements(GL_TRIANGLES, gameObject.Ebo.GetCount(), GL_UNSIGNED_INT, nullptr);
-	gameObject.Vao.Unbind();
+	gameObject._Vao.Bind();
+	gameObject._Ebo.Bind();
+	shader.setInt("Texture1", 0);
+	glActiveTexture(GL_TEXTURE0);
+	gameObject._Text.Bind();
+	glDrawElements(GL_TRIANGLES, gameObject._Ebo.GetCount(), GL_UNSIGNED_INT, nullptr);
+	gameObject._Vao.Unbind();
 }

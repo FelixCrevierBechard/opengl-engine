@@ -9,7 +9,6 @@
 #include"Renderer.h"
 #include"stb_image.h"
 #include"Camera.h"
-#include"Texture.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -29,7 +28,8 @@ int main() {
 	InitGlfw();
 
 	//InitWindow
-	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
+	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
+	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -53,6 +53,8 @@ int main() {
 	glFrontFace(GL_CCW);
 
 	Shader shader("./shader.vert_s", "./shader.frag_s");
+
+	Texture texture("Default.png", GL_RGBA);
 
 	{
 		glm::vec3 positions[] = {
@@ -177,22 +179,9 @@ int main() {
 		vbo.Unbind();
 		vao.Unbind();
 
-		GameObject cube(vao, ebo);
-		
-
-		Texture texture1("wall.jpg");
-		Texture texture2("awesomeface.png", GL_RGBA);
-
-		shader.use();
-		shader.setInt("Texture1", 0);
-		shader.setInt("Texture2", 1);
+		GameObject cube("Cube", vao, ebo, texture);
 
 		Renderer renderer;
-
-		glActiveTexture(GL_TEXTURE0);	
-		texture1.Bind();
-		glActiveTexture(GL_TEXTURE1);	
-		texture2.Bind();
 
 		float timer = 0;
 
@@ -203,13 +192,6 @@ int main() {
 			lastFrame = currentFrame;
 
 			ProcessInput(window, camera);//Input
-
-			timer += deltaTime;
-			if (timer > .5f) {
-				system("cls");
-				std::cout << round(1 / deltaTime) << '\n';
-				timer = 0;
-			}
 
 			//rendering
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);// clear with color

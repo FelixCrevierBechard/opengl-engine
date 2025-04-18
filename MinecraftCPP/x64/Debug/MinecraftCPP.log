@@ -1,12 +1,4 @@
-﻿  EBO.cpp
-  GameObject.cpp
-  Renderer.cpp
-  Texture.cpp
-  VAO.cpp
-C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\VAO.cpp(26,3): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
-  VBO.cpp
-  main.cpp
+﻿  main.cpp
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\main.cpp(7,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Generating Code...
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\VBL.h(25,1): warning C4715: 'VBE::GetTypeSize': not all control paths return a value
   MinecraftCPP.vcxproj -> C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\x64\Debug\MinecraftCPP.exe
