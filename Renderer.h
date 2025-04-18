@@ -8,6 +8,7 @@
 #include"EBO.h"
 #include"Shader.h"
 #include"GameObject.h"
+#include"Camera.h"
 
 #define ASSERT(x) if(!(x)) __debugbreak();
 #define GLCall(x) GLClearError();\
@@ -22,5 +23,6 @@ class Renderer
 public:
 	void Draw(const VAO& vao, const EBO& ebo, const Shader& shader) const;
 	void Draw(GameObject& gameObject, Shader& shader) const;
+	void SetCurrentCamera(Shader& shader, Camera& newCam) const;
 };
 

@@ -197,10 +197,8 @@ int main() {
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);// clear with color
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);// clear color/depth buffer
 
-			shader.setMat4("projection", camera.getProjection());
-
 			camera.Move(cameraPos);
-			shader.setMat4("view", camera.getView());
+			renderer.SetCurrentCamera(shader, camera);
 
 			for (auto pos : positions) {
 				cube.Positon = pos;

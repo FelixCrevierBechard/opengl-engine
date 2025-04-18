@@ -47,3 +47,9 @@ void Renderer::Draw(GameObject& gameObject, Shader& shader) const
 	gameObject._Vao.Unbind();
 	gameObject._Text.Unbind();
 }
+
+void Renderer::SetCurrentCamera(Shader& shader, Camera& newCam) const
+{
+	shader.setMat4("projection", newCam.getProjection());
+	shader.setMat4("view", newCam.getView());
+}
