@@ -13,5 +13,6 @@ public:
 	Texture(const char* fileDir, GLenum imageType = GL_RGB);
 	void SetupTexture(const char* fileDir, GLenum imageType = GL_RGB);
 	void Bind();
+	void Unbind();
 };
 

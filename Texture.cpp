@@ -46,3 +46,6 @@ void Texture::SetupTexture(const char* fileDirectory, GLenum imageType) {
 void Texture::Bind() {
     glBindTexture(GL_TEXTURE_2D, ID);
 }
+void Texture::Unbind() {
+    glBindTexture(GL_TEXTURE_2D, 0);
+}

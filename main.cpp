@@ -203,9 +203,7 @@ int main() {
 			shader.setMat4("view", camera.getView());
 
 			for (auto pos : positions) {
-				glm::mat4 model = glm::mat4(1.0f);	
-				model = glm::translate(model, pos);
-				shader.setMat4("model", model);
+				cube.Positon = pos;
 
 				renderer.Draw(cube, shader);
 			}

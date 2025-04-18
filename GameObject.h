@@ -16,6 +16,10 @@ public:
 	EBO _Ebo;
 	Texture _Text;
 
+	glm::vec3 Positon = {0, 0, 0};
+	glm::vec3 Rotation = { 0, 0, 0 };
+	glm::vec3 Scale = { 1, 1, 1 };
+
 	GameObject(const char* name, const VAO& vao, const EBO& ebo, const Texture& Texture);
 	~GameObject();
 };
