@@ -1,5 +1,4 @@
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\Camera.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\Camera.obj
-C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\EBO.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\EBO.obj
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\GameObject.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\GameObject.obj
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\glad.c;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\glad.obj
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\main.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\main.obj
@@ -7,6 +6,3 @@ C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\Renderer.cpp;C:\Users\fil
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\Shader.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\Shader.obj
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\stb_image.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\stb_image.obj
 C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\Texture.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\Texture.obj
-C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\VAO.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\VAO.obj
-C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\VBL.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\VBL.obj
-C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\VBO.cpp;C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\MinecraftCPP\x64\Debug\VBO.obj

@@ -2,10 +2,6 @@
 
 #include<glad/glad.h>
 
-#include"VBO.h"
-#include"VBL.h"
-#include"VAO.h"
-#include"EBO.h"
 #include"Shader.h"
 #include"GameObject.h"
 #include"Camera.h"
@@ -21,8 +17,8 @@ bool GLLogCall(const char* function, const char* file, int line);
 class Renderer
 {
 public:
-	void Draw(const VAO& vao, const EBO& ebo, const Shader& shader) const;
-	void Draw(GameObject& gameObject, Shader& shader) const;
+	void Draw(GameObject& gameObject, Shader& shader);
+	void Draw(std::vector<GameObject> gameObjects, Shader& shader);
 	void SetCurrentCamera(Shader& shader, Camera& newCam) const;
 };
 

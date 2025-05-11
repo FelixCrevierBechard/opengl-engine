@@ -1,5 +1,7 @@
 #include "GameObject.h"
-
-GameObject::GameObject(const char* name, const VAO& vao, const EBO& ebo, const Texture& texture = Texture("Default.png", GL_RGBA)) : _Name(name), _Vao(vao), _Ebo(ebo), _Text(texture) {}
+	
+GameObject::GameObject(const char* name, const std::vector<float>& vertices, const std::vector<float>& uv, const std::vector<unsigned int>& indices, const Texture& texture) : name(name), mesh(Mesh(vertices, uv, indices, texture)) {}
 
 GameObject::~GameObject() {  }
+
+Mesh::Mesh(const std::vector<float>& vertices, const std::vector<float>& uv, const std::vector<unsigned int>& indices, const Texture& texture) : texture(texture), vertices(vertices), uv(uv), indices(indices) {}

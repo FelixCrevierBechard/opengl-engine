@@ -400,3 +400,8 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+.vs/MinecraftCPP/v17/.suo
+.vs/MinecraftCPP/v17/Browse.VC.db
+.vs/MinecraftCPP/v17/.suo
+.vs/MinecraftCPP/v17/DocumentLayout.backup.json
+.vs/MinecraftCPP/v17/DocumentLayout.json

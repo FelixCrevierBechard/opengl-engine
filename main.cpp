@@ -5,6 +5,7 @@
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
 #include<glm/gtc/type_ptr.hpp>�
+#include <iterator>
 
 #include"Renderer.h"
 #include"stb_image.h"
@@ -57,67 +58,39 @@ int main() {
 	Texture texture("Default.png", GL_RGBA);
 
 	{
-		glm::vec3 positions[] = {
-			glm::vec3(0, 0, 0),
-			glm::vec3(0, 0, 1),
-			glm::vec3(0, 0, 2),
-			glm::vec3(0, 0, 3),
-			glm::vec3(0, 0, 4),
-			glm::vec3(1, 0, 0),
-			glm::vec3(1, 0, 1),
-			glm::vec3(1, 0, 2),
-			glm::vec3(1, 0, 3),
-			glm::vec3(1, 0, 4),
-			glm::vec3(2, 0, 0),
-			glm::vec3(2, 0, 1),
-			glm::vec3(2, 0, 2),
-			glm::vec3(2, 0, 3),
-			glm::vec3(2, 0, 4),
-			glm::vec3(3, 0, 0),
-			glm::vec3(3, 0, 1),
-			glm::vec3(3, 0, 2),
-			glm::vec3(3, 0, 3),
-			glm::vec3(3, 0, 4),
-			glm::vec3(4, 0, 0),
-			glm::vec3(4, 0, 1),
-			glm::vec3(4, 0, 2),
-			glm::vec3(4, 0, 3),
-			glm::vec3(4, 0, 4),
-		};
-
-		GLfloat block[] = {
+		float block[] = {
 			//north
-			  .5f, -.5f,  -.5f,	0.f, 0.f,
-			 -.5f, -.5f,  -.5f,	1.f, 0.f,
-			 -.5f,  .5f,  -.5f,	1.f, 1.f,
-			  .5f,  .5f,  -.5f,	0.f, 1.f,
+			  .5f, -.5f,  -.5f,	
+			 -.5f, -.5f,  -.5f,	
+			 -.5f,  .5f,  -.5f,	
+			  .5f,  .5f,  -.5f,	
 			//south
-			 -.5f, -.5f,   .5f,	0.f, 0.f,
-			  .5f, -.5f,   .5f,	1.f, 0.f,
-			  .5f,  .5f,   .5f,	1.f, 1.f,
-			 -.5f,  .5f,   .5f,	0.f, 1.f,
+			 -.5f, -.5f,   .5f,	
+			  .5f, -.5f,   .5f,	
+			  .5f,  .5f,   .5f,	
+			 -.5f,  .5f,   .5f,
 			 //east
-			 -.5f, -.5f,  -.5f,	0.f, 0.f,
-			 -.5f, -.5f,   .5f,	1.f, 0.f,
-			 -.5f,  .5f,   .5f,	1.f, 1.f,
-			 -.5f,  .5f,  -.5f,	0.f, 1.f,
+			 -.5f, -.5f,  -.5f,	
+			 -.5f, -.5f,   .5f,	
+			 -.5f,  .5f,   .5f,	
+			 -.5f,  .5f,  -.5f,	
 			 //west
-			  .5f, -.5f,   .5f,	0.f, 0.f,
-			  .5f, -.5f,  -.5f,	1.f, 0.f,
-			  .5f,  .5f,  -.5f,	1.f, 1.f,
-			  .5f,  .5f,   .5f,	0.f, 1.f,
+			  .5f, -.5f,   .5f,	
+			  .5f, -.5f,  -.5f,	
+			  .5f,  .5f,  -.5f,	
+			  .5f,  .5f,   .5f,
 			 //top
-			 -.5f,  .5f,   .5f,	0.f, 0.f,
-			  .5f,  .5f,   .5f,	1.f, 0.f,
-			  .5f,  .5f,  -.5f,	1.f, 1.f,
-			 -.5f,  .5f,  -.5f,	0.f, 1.f,
+			 -.5f,  .5f,   .5f,	
+			  .5f,  .5f,   .5f,
+			  .5f,  .5f,  -.5f,
+			 -.5f,  .5f,  -.5f,
 			 //bottom
-			  .5f, -.5f,   .5f,	0.f, 0.f,
-			 -.5f, -.5f,   .5f,	1.f, 0.f,
-			 -.5f, -.5f,  -.5f,	1.f, 1.f,
-			  .5f, -.5f,  -.5f,	0.f, 1.f,
+			  .5f, -.5f,   .5f,	
+			 -.5f, -.5f,   .5f,	
+			 -.5f, -.5f,  -.5f,	
+			  .5f, -.5f,  -.5f,
 		};
-		GLfloat uv[]{
+		float uv[]{
 			0.f, 0.f,
 			1.f, 0.f,
 			1.f, 1.f,
@@ -148,7 +121,7 @@ int main() {
 			1.f, 1.f,
 			0.f, 1.f,
 		};
-		GLuint indices[] = {
+		unsigned int indices[] = {
 			//north
 			0, 1, 2,
 			2, 3, 0,
@@ -169,17 +142,27 @@ int main() {
 			22, 23, 20
 		};
 
-		VAO vao;
-		EBO ebo(indices, 36);
-		VBO vbo(block, sizeof(block));
-		VBL layout;
-		layout.Push<float>(3);
-		layout.Push<float>(2);
-		vao.AddBuffer(vbo, layout);
-		vbo.Unbind();
-		vao.Unbind();
+		std::vector<float> vert;
+		std::vector<float> UV;
+		std::vector<unsigned int> tri;
 
-		GameObject cube("Cube", vao, ebo, texture);
+		vert.insert(vert.end(), std::begin(block), std::end(block));
+		UV.insert(UV.end(), std::begin(uv), std::end(uv));
+		tri.insert(tri.end(), std::begin(indices), std::end(indices));
+
+		GameObject cube("Cube", vert, UV, tri);
+
+		std::vector<GameObject> objects;
+		for (int x = 0; x < 16; x++)
+			for (int y = 0; y < 16; y++)
+				for (int z = 0; z < 16; z++)
+				{
+					GameObject obj = cube;
+					obj.Positon = {x, y, z};
+					objects.push_back(obj);
+				}
+
+		GameObject merged("Chunk", GameObject::MergeVertices(objects), GameObject::MergeUV(objects), GameObject::MergeIndices(objects));
 
 		Renderer renderer;
 
@@ -200,11 +183,9 @@ int main() {
 			camera.Move(cameraPos);
 			renderer.SetCurrentCamera(shader, camera);
 
-			for (auto pos : positions) {
-				cube.Positon = pos;
-
-				renderer.Draw(cube, shader);
-			}
+			renderer.Draw(merged, shader);
+			//renderer.Draw(cube, shader);
+			//renderer.Draw(objects, shader);
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();
