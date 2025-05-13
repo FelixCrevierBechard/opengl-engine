@@ -1,5 +1,4 @@
 C:\MinecraftCPP\opengl-engine\Camera.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\Camera.obj
-C:\MinecraftCPP\opengl-engine\EBO.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\EBO.obj
 C:\MinecraftCPP\opengl-engine\GameObject.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\GameObject.obj
 C:\MinecraftCPP\opengl-engine\glad.c;C:\MinecraftCPP\opengl-engine\x64\Debug\glad.obj
 C:\MinecraftCPP\opengl-engine\main.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\main.obj
@@ -7,6 +6,3 @@ C:\MinecraftCPP\opengl-engine\Renderer.cpp;C:\MinecraftCPP\opengl-engine\x64\Deb
 C:\MinecraftCPP\opengl-engine\Shader.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\Shader.obj
 C:\MinecraftCPP\opengl-engine\stb_image.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\stb_image.obj
 C:\MinecraftCPP\opengl-engine\Texture.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\Texture.obj
-C:\MinecraftCPP\opengl-engine\VAO.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\VAO.obj
-C:\MinecraftCPP\opengl-engine\VBL.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\VBL.obj
-C:\MinecraftCPP\opengl-engine\VBO.cpp;C:\MinecraftCPP\opengl-engine\x64\Debug\VBO.obj

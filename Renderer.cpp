@@ -26,11 +26,6 @@ void Renderer::Draw(GameObject& gameObject, Shader& shader)
 
 	shader.use();
 
-	//vao
-	unsigned int vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
 	//ebo
 	unsigned int ebo;
 	glGenBuffers(1, &ebo);
@@ -54,8 +49,6 @@ void Renderer::Draw(GameObject& gameObject, Shader& shader)
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8, 0);
 	glEnableVertexAttribArray(1);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 	shader.setInt("Texture1", 0);
 	glActiveTexture(GL_TEXTURE0);
 	gameObject.mesh.texture.Bind();
@@ -70,9 +63,11 @@ void Renderer::Draw(GameObject& gameObject, Shader& shader)
 
 	glDrawElements(GL_TRIANGLES, gameObject.mesh.indices.size(), GL_UNSIGNED_INT, nullptr);
 
-	glBindVertexArray(0);	
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glDeleteBuffers(1, &vert);
+	glDeleteBuffers(1, &uv);
+	glDeleteBuffers(1, &ebo);
 }
 
 void Renderer::Draw(std::vector<GameObject> gameObjects, Shader& shader)

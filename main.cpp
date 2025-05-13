@@ -16,8 +16,9 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void InitGlfw();
 void ProcessInput(GLFWwindow* window, Camera cam);
 
-const int SCREEN_WIDTH = 1600;
-const int SCREEN_HEIGHT = 900;
+GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
 glm::vec3 cameraPos(0.f, 0.f, 5.f);
 Camera camera(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -29,8 +30,8 @@ int main() {
 	InitGlfw();
 
 	//InitWindow
-	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
-	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
+	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -53,11 +54,12 @@ int main() {
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CCW);
 
-	Shader shader("./shader.vert_s", "./shader.frag_s");
-
-	Texture texture("Default.png", GL_RGBA);
-
 	{
+		Shader shader("./shader.vert_s", "./shader.frag_s");
+
+		Texture texture("Default.png", GL_RGBA);
+
+	
 		float block[] = {
 			//north
 			  .5f, -.5f,  -.5f,	
@@ -153,9 +155,9 @@ int main() {
 		GameObject cube("Cube", vert, UV, tri);
 
 		std::vector<GameObject> objects;
-		for (int x = 0; x < 16; x++)
-			for (int y = 0; y < 16; y++)
-				for (int z = 0; z < 16; z++)
+		for (int x = 0; x < 32; x++)
+			for (int y = 0; y < 32; y++)
+				for (int z = 0; z < 32; z++)
 				{
 					GameObject obj = cube;
 					obj.Positon = {x, y, z};

@@ -16,7 +16,14 @@ bool GLLogCall(const char* function, const char* file, int line);
 
 class Renderer
 {
+private:
+	unsigned int default_vao;
 public:
+	Renderer() {
+		glGenVertexArrays(1, &default_vao);
+		glBindVertexArray(default_vao);
+	}
+	~Renderer() {}
 	void Draw(GameObject& gameObject, Shader& shader);
 	void Draw(std::vector<GameObject> gameObjects, Shader& shader);
 	void SetCurrentCamera(Shader& shader, Camera& newCam) const;
