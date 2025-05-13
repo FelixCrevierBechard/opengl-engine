@@ -6,6 +6,13 @@
 #include<glm/gtc/matrix_transform.hpp>
 #include<vector>
 
+struct Transform
+{
+public:
+	glm::vec3 Positon = { 0, 0, 0 };
+	glm::vec3 Rotation = { 0, 0, 0 };
+	glm::vec3 Scale = { 1, 1, 1 };
+};
 class Mesh {
 public:
 	Texture texture = Texture("Default.png", GL_RGBA);
@@ -22,10 +29,7 @@ class GameObject
 public:
 	const char* name;
 	Mesh mesh;
-
-	glm::vec3 Positon = {0, 0, 0};
-	glm::vec3 Rotation = { 0, 0, 0 };
-	glm::vec3 Scale = { 1, 1, 1 };
+	Transform transform;
 
 	GameObject(const char* name, const std::vector<float>& vertices, const std::vector<float>& uv, const std::vector<unsigned int>& indices, const Texture& texture = Texture("Default.png", GL_RGBA));
 	~GameObject();
@@ -38,11 +42,11 @@ public:
 			for (int i = 0; i < obj.mesh.vertices.size(); ++i)
 			{
 				if(i % 3 == 0)
-					vertices.push_back(obj.mesh.vertices[i] + obj.Positon.x);
+					vertices.push_back(obj.mesh.vertices[i] + obj.transform.Positon.x);
 				else if (i % 3 == 1)
-					vertices.push_back(obj.mesh.vertices[i] + obj.Positon.y);
+					vertices.push_back(obj.mesh.vertices[i] + obj.transform.Positon.y);
 				else
-					vertices.push_back(obj.mesh.vertices[i] + obj.Positon.z);
+					vertices.push_back(obj.mesh.vertices[i] + obj.transform.Positon.z);
 			}
 		}
 		return vertices;

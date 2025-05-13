@@ -1,15 +1,27 @@
-﻿  Renderer.cpp
-C:\MinecraftCPP\opengl-engine\GameObject.h(69,39): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+﻿  GameObject.cpp
+C:\MinecraftCPP\opengl-engine\GameObject.h(73,39): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'GameObject.cpp')
+  
+  Renderer.cpp
+C:\MinecraftCPP\opengl-engine\GameObject.h(73,39): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
   (compiling source file 'Renderer.cpp')
   
-C:\MinecraftCPP\opengl-engine\Renderer.cpp(64,59): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\MinecraftCPP\opengl-engine\Renderer.h(26,28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'Renderer.cpp')
+  
   Texture.cpp
-C:\MinecraftCPP\opengl-engine\GameObject.h(69,39): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\MinecraftCPP\opengl-engine\GameObject.h(73,39): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'Texture.cpp')
+  
+C:\MinecraftCPP\opengl-engine\Renderer.h(26,28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
   (compiling source file 'Texture.cpp')
   
   main.cpp
 C:\MinecraftCPP\opengl-engine\main.cpp(7,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\MinecraftCPP\opengl-engine\GameObject.h(69,39): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\MinecraftCPP\opengl-engine\GameObject.h(73,39): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'main.cpp')
+  
+C:\MinecraftCPP\opengl-engine\Renderer.h(26,28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
   (compiling source file 'main.cpp')
   
   Generating Code...

@@ -5,7 +5,8 @@
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
 #include<glm/gtc/type_ptr.hpp>�
-#include <iterator>
+#include<iterator>
+#include<map>
 
 #include"Renderer.h"
 #include"stb_image.h"
@@ -160,11 +161,12 @@ int main() {
 				for (int z = 0; z < 32; z++)
 				{
 					GameObject obj = cube;
-					obj.Positon = {x, y, z};
+					obj.transform.Positon = {x, y, z};
 					objects.push_back(obj);
 				}
 
 		GameObject merged("Chunk", GameObject::MergeVertices(objects), GameObject::MergeUV(objects), GameObject::MergeIndices(objects));
+		RendererObject mergedRO(merged.mesh.indices, merged.mesh.vertices, merged.mesh.uv, merged.mesh.texture);
 
 		Renderer renderer;
 
@@ -185,7 +187,7 @@ int main() {
 			camera.Move(cameraPos);
 			renderer.SetCurrentCamera(shader, camera);
 
-			renderer.Draw(merged, shader);
+			renderer.Draw(mergedRO, merged.transform, shader);
 			//renderer.Draw(cube, shader);
 			//renderer.Draw(objects, shader);
 
