@@ -3,12 +3,12 @@
 #include "Renderer.h"
 
 Texture::Texture(const char* fileDirectory, GLenum imageType) {
-    SetupTexture(fileDirectory, imageType);
+    setup_texture(fileDirectory, imageType);
 }
 
-void Texture::SetupTexture(const char* fileDirectory, GLenum imageType) {
-    GLCall(glGenTextures(1, &ID));
-    GLCall(glBindTexture(GL_TEXTURE_2D, ID)); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
+void Texture::setup_texture(const char* fileDirectory, GLenum imageType) {
+    GLCall(glGenTextures(1, &id));
+    GLCall(glBindTexture(GL_TEXTURE_2D, id)); // all upcoming GL_TEXTURE_2D operations now have effect on this texture object
     // set the texture wrapping parameters
     GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));	// set texture wrapping to GL_REPEAT (default wrapping method)
     GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
@@ -43,9 +43,9 @@ void Texture::SetupTexture(const char* fileDirectory, GLenum imageType) {
     stbi_image_free(data);
 }
 
-void Texture::Bind() {
-    glBindTexture(GL_TEXTURE_2D, ID);
+void Texture::bind() {
+    glBindTexture(GL_TEXTURE_2D, id);
 }
-void Texture::Unbind() {
+void Texture::unbind() {
     glBindTexture(GL_TEXTURE_2D, 0);
 }

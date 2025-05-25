@@ -7,8 +7,10 @@
 #include<glm/gtc/type_ptr.hpp>�
 #include<iterator>
 #include<map>
+#include<vector>
 
 #include"Renderer.h"
+#include"Object.h"
 #include"stb_image.h"
 #include"Camera.h"
 
@@ -153,20 +155,20 @@ int main() {
 		UV.insert(UV.end(), std::begin(uv), std::end(uv));
 		tri.insert(tri.end(), std::begin(indices), std::end(indices));
 
-		GameObject cube("Cube", vert, UV, tri);
+		Object cube("Cube", vert, UV, tri);
 
-		std::vector<GameObject> objects;
+		std::vector<Object> objects;
 		for (int x = 0; x < 32; x++)
 			for (int y = 0; y < 32; y++)
 				for (int z = 0; z < 32; z++)
 				{
-					GameObject obj = cube;
+					Object obj = cube;
 					obj.transform.Positon = {x, y, z};
 					objects.push_back(obj);
 				}
 
-		GameObject merged("Chunk", GameObject::MergeVertices(objects), GameObject::MergeUV(objects), GameObject::MergeIndices(objects));
-		RendererObject mergedRO(merged.mesh.indices, merged.mesh.vertices, merged.mesh.uv, merged.mesh.texture);
+		Object merged = Object::merge_objects(objects, "Chunk");
+		RendererObject mergedRenderObject = merged.parse();
 
 		Renderer renderer;
 
@@ -184,10 +186,10 @@ int main() {
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);// clear with color
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);// clear color/depth buffer
 
-			camera.Move(cameraPos);
-			renderer.SetCurrentCamera(shader, camera);
+			camera.move(cameraPos);
+			renderer.set_currentcamera(shader, camera);
 
-			renderer.Draw(mergedRO, merged.transform, shader);
+			renderer.draw(mergedRenderObject, shader);
 			//renderer.Draw(cube, shader);
 			//renderer.Draw(objects, shader);
 
@@ -218,17 +220,17 @@ void ProcessInput(GLFWwindow* window, Camera cam) {
 
 	float cameraSpeed = static_cast<float>(2.5 * deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		cameraPos += cameraSpeed * cam.Front;
+		cameraPos += cameraSpeed * cam.front;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		cameraPos -= cameraSpeed * cam.Front;
+		cameraPos -= cameraSpeed * cam.front;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		cameraPos -= glm::normalize(glm::cross(cam.Front, cam.GlobalUp)) * cameraSpeed;
+		cameraPos -= glm::normalize(glm::cross(cam.front, cam.globalUp)) * cameraSpeed;
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		cameraPos += glm::normalize(glm::cross(cam.Front, cam.GlobalUp)) * cameraSpeed;
+		cameraPos += glm::normalize(glm::cross(cam.front, cam.globalUp)) * cameraSpeed;
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		cameraPos += cameraSpeed * cam.GlobalUp;
+		cameraPos += cameraSpeed * cam.globalUp;
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		cameraPos -= cameraSpeed * cam.GlobalUp;
+		cameraPos -= cameraSpeed * cam.globalUp;
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos) {

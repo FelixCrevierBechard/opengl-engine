@@ -1,6 +1,2 @@
-﻿  main.cpp
-C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\main.cpp(7,9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\GameObject.h(69,39): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
-  (compiling source file 'main.cpp')
-  
-  MinecraftCPP.vcxproj -> C:\Users\filbe\OneDrive\Documents\GitHub\opengl-engine\x64\Debug\MinecraftCPP.exe
+﻿  Camera.cpp
+  MinecraftCPP.vcxproj -> C:\Users\filbe\Documents\opengl-engine\x64\Debug\MinecraftCPP.exe

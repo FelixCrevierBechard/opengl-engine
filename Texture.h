@@ -8,11 +8,11 @@
 class Texture
 {
 public:
-	unsigned int ID;
+	unsigned int id;
 
 	Texture(const char* fileDir, GLenum imageType = GL_RGB);
-	void SetupTexture(const char* fileDir, GLenum imageType = GL_RGB);
-	void Bind();
-	void Unbind();
+	void setup_texture(const char* fileDir, GLenum imageType = GL_RGB);
+	void bind();
+	void unbind();
 };
 

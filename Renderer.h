@@ -1,11 +1,11 @@
 #pragma once
 
-#include<glad/glad.h>
 #include<map>
+#include<vector>
 
 #include"Shader.h"
-#include"GameObject.h"
 #include"Camera.h"
+#include"Texture.h"
 
 #define ASSERT(x) if(!(x)) __debugbreak();
 #define GLCall(x) GLClearError();\
@@ -16,11 +16,14 @@ void GLClearError();
 bool GLLogCall(const char* function, const char* file, int line);
 
 class RendererObject {
+private:
+	// Private members for RendererObject can be added here if needed
 public:
-	unsigned int indexCount;
 	unsigned int ebo;
+	unsigned int indexCount;
 	std::map<const char*, unsigned int> vbos;
 	Texture texture;
+	glm::mat4 model = glm::mat4(1.f); // Model matrix for transformations
 
 	RendererObject(std::vector<unsigned int>& indices, std::vector<float>& vertices, std::vector<float>& uv, Texture& texture) : texture(texture) {
 		indexCount = indices.size();
@@ -40,20 +43,21 @@ public:
 		vbos["uv"] = UV;
 	}
 	~RendererObject() {}
+
+	void set_model(glm::mat4 modelMatrix) { model = modelMatrix; }
 };
 
 class Renderer
 {
 private:
-	unsigned int default_vao;
+	unsigned int defaultVao;
 public:
 	Renderer() {
-		glGenVertexArrays(1, &default_vao);
-		glBindVertexArray(default_vao);
+		glGenVertexArrays(1, &defaultVao);
+		glBindVertexArray(defaultVao);
 	}
 	~Renderer() {}
-	void Draw(RendererObject ro, Transform transform, Shader& shader);
-	void Draw(std::vector<GameObject> gameObjects, Shader& shader);
-	void SetCurrentCamera(Shader& shader, Camera& newCam) const;
+	void draw(RendererObject ro, Shader& shader);
+	void set_currentcamera(Shader& shader, Camera& newCam) const;
 };
 

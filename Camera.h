@@ -6,28 +6,40 @@
 
 class Camera
 {
+private:
+	glm::mat4 projection;
+	glm::mat4 view = glm::mat4(1.f);
+
+	int screenWidth = 500;
+	int screenHeight = 500;
+
+	float yaw = -90.0f;
+	float pitch = 0.0f;
+	float lastX = 1600.0f / 2.0;
+	float lastY = 900.0 / 2.0;
+	float fov = 90.0f;
+	float closePlane = 0.1f;
+	float farPlane = 100.0f;
+	bool firstMouse = true;
+
+	glm::vec3 position = glm::vec3(0.0f, 0.0f, 5.0f); // Default camera position
 public:
-	const glm::vec3 GlobalUp = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 Front = glm::vec3(0.0f, 0.0f, -1.0f);
+	const glm::vec3 globalUp = glm::vec3(0.0f, 1.0f, 0.0f);
+	glm::vec3 front = glm::vec3(0.0f, 0.0f, -1.0f);
 
 	Camera(int screenWidth, int screenHeight);
 
-	void Move(glm::vec3 position);
-	glm::mat4 getProjection();
-	glm::mat4 getView() const;
+	void move(glm::vec3 position);
+	glm::mat4 get_projection();
+	glm::mat4 get_view() const;
+	glm::vec3 get_position() const { return position; }
+
+	void set_screen_size(int width, int height) {
+		screenWidth = width;
+		screenHeight = height;
+		projection = glm::perspective(glm::radians(fov), (float)screenWidth / (float)screenHeight, closePlane, farPlane);
+	}
+
 	void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-private:
-	glm::mat4 Projection;
-	glm::mat4 View = glm::mat4(1.f);
-
-	int ScreenWidth;
-	int ScreenHeight;
-
-	float Yaw = -90.0f;
-	float Pitch = 0.0f;
-	float LastX = 1600.0f / 2.0;
-	float LastY = 900.0 / 2.0;
-	float Fov = 90.0f;
-	bool FirstMouse = true;
 };
 
