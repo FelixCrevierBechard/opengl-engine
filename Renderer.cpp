@@ -43,6 +43,12 @@ void Renderer::draw(RendererObject rendererObject, Shader& shader)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+void Renderer::draw(std::vector<RendererObject>& ro, Shader& shader)
+{
+	for (auto& obj : ro)
+		draw(obj, shader);
+}
+
 void Renderer::set_currentcamera(Shader& shader, Camera& newCam) const
 {
 	shader.set_mat4("projection", newCam.get_projection());

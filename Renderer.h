@@ -58,6 +58,7 @@ public:
 	}
 	~Renderer() {}
 	void draw(RendererObject ro, Shader& shader);
+	void draw(std::vector<RendererObject>& ro, Shader& shader);
 	void set_currentcamera(Shader& shader, Camera& newCam) const;
 };
 
