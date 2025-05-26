@@ -45,6 +45,13 @@ public:
 		std::vector<unsigned int> indices = MergeIndices(objects);
 		return Object(name, vertices, uv, indices, objects[0].material.texture);
 	}
+	static Object merge_objects(const std::vector<Object>& objects, const Texture& texture, const char* name = "MergedObject")
+	{
+		std::vector<float> vertices = merge_vertices(objects);
+		std::vector<float> uv = MergeUV(objects);
+		std::vector<unsigned int> indices = MergeIndices(objects);
+		return Object(name, vertices, uv, indices, texture);
+	}
 	static std::vector<float> merge_vertices(const std::vector<Object>& objects)
 	{
 		std::vector<float> vertices;

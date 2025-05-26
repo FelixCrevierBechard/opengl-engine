@@ -14,15 +14,15 @@
 #include"stb_image.h"
 #include"Camera.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void framebuffersize_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void key_callback(GLFWwindow* window, int key, int scanCode, int action, int mods);
 void process_sustainedinput(GLFWwindow* window);
-void InitGlfw();
+void init_glfw();
 
 GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-const int SCREEN_WIDTH = 1600;
-const int SCREEN_HEIGHT = 900;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
 glm::vec3 cameraPos(0.f, 0.f, 5.f);
 Camera* camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -30,14 +30,14 @@ Camera* camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
-bool mouseMode = true; // true = mouse is hidden, false = mouse is visible
+bool mouseMode = true; // true = mouse is disabled, false = mouse is visible
 
 int main() {
-	InitGlfw();
+	init_glfw();
 
 	//InitWindow
-	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
-	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
+	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -51,12 +51,12 @@ int main() {
 	glfwSetKeyCallback(window, key_callback);
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSwapInterval(.5f); //60 fps so our gpu doesnt explode
+	glfwSwapInterval(1); //vSync so our gpu doesnt explode
 
 	//HadleViewport
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetFramebufferSizeCallback(window, framebuffersize_callback);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CCW);
@@ -64,7 +64,7 @@ int main() {
 	{
 		Shader shader("./shader.vert_s", "./shader.frag_s");
 
-		Texture texture("Default.png", GL_RGBA);
+		Texture texture("wall.jpg", GL_RGB);
 
 	
 		float block[] = {
@@ -158,8 +158,8 @@ int main() {
 		vert.insert(vert.end(), std::begin(block), std::end(block));
 		UV.insert(UV.end(), std::begin(uv), std::end(uv));
 		tri.insert(tri.end(), std::begin(indices), std::end(indices));
-
-		Object cube("Cube", vert, UV, tri);
+		
+		Object cube("Cube", vert, UV, tri, texture);
 
 		std::vector<Object> objects;
 		for (int x = 0; x < 32; x++)
@@ -212,7 +212,7 @@ int main() {
 	return 0;
 }
 
-void InitGlfw() {
+void init_glfw() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -220,7 +220,7 @@ void InitGlfw() {
 	glfwWindowHint(GLFW_SAMPLES, 4);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+void framebuffersize_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
@@ -250,4 +250,6 @@ void process_sustainedinput(GLFWwindow* window) { // processes input that is hel
 void key_callback(GLFWwindow* window, int key, int scanCode, int action, int mods) {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		mouseMode = !mouseMode;
+	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
 }
