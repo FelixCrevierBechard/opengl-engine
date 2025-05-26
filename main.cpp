@@ -16,25 +16,28 @@
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void key_callback(GLFWwindow* window, int key, int scanCode, int action, int mods);
+void process_sustainedinput(GLFWwindow* window);
 void InitGlfw();
-void ProcessInput(GLFWwindow* window, Camera cam);
 
 GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-const int SCREEN_WIDTH = 1920;
-const int SCREEN_HEIGHT = 1080;
+const int SCREEN_WIDTH = 1600;
+const int SCREEN_HEIGHT = 900;
 
 glm::vec3 cameraPos(0.f, 0.f, 5.f);
-Camera camera(SCREEN_WIDTH, SCREEN_HEIGHT);
+Camera* camera = new Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
+
+bool mouseMode = true; // true = mouse is hidden, false = mouse is visible
 
 int main() {
 	InitGlfw();
 
 	//InitWindow
-	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
-	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
+	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
+	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -45,9 +48,10 @@ int main() {
 	gladLoadGL();
 
 	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetKeyCallback(window, key_callback);
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwSwapInterval(1); //60 fps so our gpu doesnt explode
+	glfwSwapInterval(.5f); //60 fps so our gpu doesnt explode
 
 	//HadleViewport
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -180,18 +184,24 @@ int main() {
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 
-			ProcessInput(window, camera);//Input
+			//FPS counter
+			timer += deltaTime;
+			if (timer > 1) {
+				system("cls");
+				std::cout << "FPS: " << 1.0f / deltaTime;
+				timer = 0;
+			}
 
 			//rendering
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);// clear with color
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);// clear color/depth buffer
 
-			camera.move(cameraPos);
-			renderer.set_currentcamera(shader, camera);
+			process_sustainedinput(window); // processes input that is held down
+
+			camera->move(cameraPos);
+			renderer.set_currentcamera(shader, *camera);
 
 			renderer.draw(mergedRenderObject, shader);
-			//renderer.Draw(cube, shader);
-			//renderer.Draw(objects, shader);
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();
@@ -214,25 +224,30 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
-void ProcessInput(GLFWwindow* window, Camera cam) {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
-
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+	if (mouseMode) {
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		camera->mouse_callback(window, xpos, ypos);
+	}
+	else 
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+}
+void process_sustainedinput(GLFWwindow* window) { // processes input that is held down
 	float cameraSpeed = static_cast<float>(2.5 * deltaTime);
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		cameraPos += cameraSpeed * cam.front;
+		cameraPos += cameraSpeed * camera->front;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		cameraPos -= cameraSpeed * cam.front;
+		cameraPos -= cameraSpeed * camera->front;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		cameraPos -= glm::normalize(glm::cross(cam.front, cam.globalUp)) * cameraSpeed;
+		cameraPos -= glm::normalize(glm::cross(camera->front, camera->globalUp)) * cameraSpeed;
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		cameraPos += glm::normalize(glm::cross(cam.front, cam.globalUp)) * cameraSpeed;
+		cameraPos += glm::normalize(glm::cross(camera->front, camera->globalUp)) * cameraSpeed;
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-		cameraPos += cameraSpeed * cam.globalUp;
+		cameraPos += cameraSpeed * camera->globalUp;
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		cameraPos -= cameraSpeed * cam.globalUp;
+		cameraPos -= cameraSpeed * camera->globalUp;
 }
-
-void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-	camera.mouse_callback(window, xpos, ypos);
+void key_callback(GLFWwindow* window, int key, int scanCode, int action, int mods) {
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		mouseMode = !mouseMode;
 }

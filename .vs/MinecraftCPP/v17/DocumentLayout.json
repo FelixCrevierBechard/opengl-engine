@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\filbe\\Documents\\opengl-engine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|C:\\Users\\filbe\\Documents\\opengl-engine\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|solutionrelative:Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|C:\\Users\\filbe\\Documents\\opengl-engine\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|C:\\Users\\filbe\\Documents\\opengl-engine\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|solutionrelative:Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|C:\\Users\\filbe\\Documents\\opengl-engine\\Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|solutionrelative:Renderer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|C:\\Users\\filbe\\Documents\\opengl-engine\\Camera.cpp||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|solutionrelative:Camera.cpp||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|C:\\Users\\filbe\\Documents\\opengl-engine\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|C:\\Users\\filbe\\Documents\\opengl-engine\\Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|solutionrelative:Renderer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{714CDF54-E3BA-46D9-87D6-7DC575BDF941}|MinecraftCPP.vcxproj|C:\\Users\\filbe\\Documents\\opengl-engine\\Camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -30,24 +30,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Renderer.cpp",
               "DocumentMoniker": "C:\\Users\\filbe\\Documents\\opengl-engine\\Renderer.cpp",
               "RelativeDocumentMoniker": "Renderer.cpp",
               "ToolTip": "C:\\Users\\filbe\\Documents\\opengl-engine\\Renderer.cpp",
               "RelativeToolTip": "Renderer.cpp",
-              "ViewState": "AgIAABYAAAAAAAAAAADgvy8AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-25T18:27:36.208Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Renderer.h",
               "DocumentMoniker": "C:\\Users\\filbe\\Documents\\opengl-engine\\Renderer.h",
               "RelativeDocumentMoniker": "Renderer.h",
@@ -55,8 +55,7 @@
               "RelativeToolTip": "Renderer.h",
               "ViewState": "AgIAABgAAAAAAAAAAAAAADwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-25T18:27:17.54Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-25T18:27:17.54Z"
             },
             {
               "$type": "Document",
@@ -81,18 +80,17 @@
               "RelativeToolTip": "Camera.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-25T18:12:35.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-25T18:12:35.644Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\filbe\\Documents\\opengl-engine\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "C:\\Users\\filbe\\Documents\\opengl-engine\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACQAAABtAAAAAAAAAA==",
+              "ViewState": "AgIAALoAAAAAAAAAAAAAADUAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-25T17:52:49.676Z",
               "EditorCaption": ""
