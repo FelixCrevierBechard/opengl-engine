@@ -8,6 +8,5 @@ uniform float alphaValue;
 
 void main()
 {
-	vec3 color = texture(text, TexCoord).xyz;
-	FragColor = vec4(color, alphaValue);
+	FragColor = texture(text, TexCoord);
 }

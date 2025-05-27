@@ -38,6 +38,16 @@ public:
 
 	RendererObject parse() { return RendererObject(mesh.indices, mesh.vertices, mesh.uv, material.texture); }
 
+	glm::mat4 get_model() {
+		glm::mat4 model = glm::mat4(1.f);
+		model = glm::translate(model, transform.Positon);
+		model = glm::rotate(model, glm::radians(transform.Rotation.x), { 1, 0, 0 });
+		model = glm::rotate(model, glm::radians(transform.Rotation.y), { 0, 1, 0 });
+		model = glm::rotate(model, glm::radians(transform.Rotation.z), { 0, 0, 1 });
+		model = glm::scale(model, transform.Scale);
+		return model;
+	}
+
 	//STATIC METHODS FOR MERGING OBJECTS
 	static Object merge_objects(const std::vector<Object>& objects, const char* name = "MergedObject")
 	{

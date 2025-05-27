@@ -16,6 +16,7 @@ bool GLLogCall(const char* function, const char* file, int line) {
 
 void Renderer::draw(RendererObject rendererObject, Shader& shader)
 {
+	glBindVertexArray(defaultVao);
 	shader.use();
 	//ebo
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rendererObject.ebo);
@@ -41,6 +42,7 @@ void Renderer::draw(RendererObject rendererObject, Shader& shader)
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }
 
 void Renderer::draw(std::vector<RendererObject>& ro, Shader& shader)

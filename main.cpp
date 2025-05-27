@@ -20,7 +20,7 @@ void key_callback(GLFWwindow* window, int key, int scanCode, int action, int mod
 void process_sustainedinput(GLFWwindow* window);
 void init_glfw();
 
-GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+//GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;
 
@@ -49,24 +49,22 @@ int main() {
 
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetKeyCallback(window, key_callback);
+	glfwSetFramebufferSizeCallback(window, framebuffersize_callback);
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glfwSwapInterval(1); //vSync so our gpu doesnt explode
 
-	//HadleViewport
-	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-	glfwSetFramebufferSizeCallback(window, framebuffersize_callback);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
-	glFrontFace(GL_CCW);
-
 	{
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glEnable(GL_CULL_FACE);
+		glFrontFace(GL_CCW);
+	
 		Shader shader("./shader_v.glsl", "./shader_f.glsl");
 
 		Texture texture("wall.jpg", GL_RGB);
 
-	
 		float block[] = {
 			//north
 			  .5f, -.5f,  -.5f,	
@@ -168,11 +166,13 @@ int main() {
 				{
 					Object obj = cube;
 					obj.transform.Positon = {x, y, z};
+					obj.transform.Scale *= 2;
 					objects.push_back(obj);
 				}
 
 		Object merged = Object::merge_objects(objects, "Chunk");
 		RendererObject mergedRenderObject = merged.parse();
+		mergedRenderObject.set_model(merged.get_model());
 
 		Renderer renderer;
 
@@ -225,12 +225,8 @@ void framebuffersize_callback(GLFWwindow* window, int width, int height) {
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
-	if (mouseMode) {
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	if(mouseMode)
 		camera->mouse_callback(window, xpos, ypos);
-	}
-	else 
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 void process_sustainedinput(GLFWwindow* window) { // processes input that is held down
 	float cameraSpeed = static_cast<float>(2.5 * deltaTime);
@@ -248,8 +244,13 @@ void process_sustainedinput(GLFWwindow* window) { // processes input that is hel
 		cameraPos -= cameraSpeed * camera->globalUp;
 }
 void key_callback(GLFWwindow* window, int key, int scanCode, int action, int mods) {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 		mouseMode = !mouseMode;
+		if (mouseMode)
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		else
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
 	if (key == GLFW_KEY_ENTER && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 }
