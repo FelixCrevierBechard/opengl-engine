@@ -23,6 +23,7 @@ public:
 struct Material
 {
 	Texture texture = Texture("Default.png", GL_RGBA);
+	float transparency = .5f; // 1.0f = opaque, 0.0f = fully transparent
 };
 class Object
 {

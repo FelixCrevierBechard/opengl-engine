@@ -29,8 +29,8 @@ void Renderer::draw(RendererObject rendererObject, Shader& shader)
 
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8, 0);
 	glEnableVertexAttribArray(1);
-	//texutre
-	shader.set_int("Texture1", 0);
+	//texture
+	shader.set_int("Texture", 0);
 	glActiveTexture(GL_TEXTURE0);
 	rendererObject.texture.bind();
 	//model

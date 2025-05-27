@@ -36,8 +36,8 @@ int main() {
 	init_glfw();
 
 	//InitWindow
-	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
-	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
+	GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", NULL, NULL);
+	//GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Engine", glfwGetPrimaryMonitor(), NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -50,7 +50,6 @@ int main() {
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetKeyCallback(window, key_callback);
 
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSwapInterval(1); //vSync so our gpu doesnt explode
 
 	//HadleViewport
@@ -58,11 +57,12 @@ int main() {
 
 	glfwSetFramebufferSizeCallback(window, framebuffersize_callback);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CCW);
 
 	{
-		Shader shader("./shader.vert_s", "./shader.frag_s");
+		Shader shader("./shader_v.glsl", "./shader_f.glsl");
 
 		Texture texture("wall.jpg", GL_RGB);
 
