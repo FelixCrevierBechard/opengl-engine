@@ -160,17 +160,20 @@ int main() {
 		Object cube("Cube", vert, UV, tri, texture);
 
 		std::vector<Object> objects;
+		std::vector<RendererObject> renderObjects;
 		for (int x = 0; x < 32; x++)
 			for (int y = 0; y < 32; y++)
 				for (int z = 0; z < 32; z++)
 				{
 					Object obj = cube;
 					obj.transform.Positon = {x, y, z};
-					obj.transform.Scale *= 2;
+					obj.transform.Scale = { 0.5f, 0.5f, 0.5f };
+					obj.transform.Rotation = { 45.f, 0.f, 0.f };
 					objects.push_back(obj);
+					renderObjects.push_back(obj.parse());
 				}
 
-		Object merged = Object::merge_objects(objects, "Chunk");
+		Object merged = Object::merge_objects(&objects, "Chunk");
 		RendererObject mergedRenderObject = merged.parse();
 		mergedRenderObject.set_model(merged.get_model());
 
@@ -199,9 +202,10 @@ int main() {
 			process_sustainedinput(window); // processes input that is held down
 
 			camera->move(cameraPos);
-			renderer.set_currentcamera(shader, *camera);
+			renderer.set_currentcamera(&shader, camera);
 
-			renderer.draw(mergedRenderObject, shader);
+			renderer.draw(&mergedRenderObject, &shader);
+			//renderer.draw(&renderObjects, &shader);
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();

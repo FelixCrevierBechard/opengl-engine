@@ -25,7 +25,7 @@ public:
 	Texture texture;
 	glm::mat4 model = glm::mat4(1.f); // Model matrix for transformations
 
-	RendererObject(std::vector<unsigned int>& indices, std::vector<float>& vertices, std::vector<float>& uv, Texture& texture) : texture(texture) {
+	RendererObject(std::vector<unsigned int>& indices, std::vector<float>& vertices, std::vector<float>& uv, Texture& texture, glm::mat4& modelMatrix) : texture(texture) {
 		indexCount = indices.size();
 		glGenBuffers(1, &ebo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
@@ -41,6 +41,8 @@ public:
 		glBindBuffer(GL_ARRAY_BUFFER, UV);
 		glBufferData(GL_ARRAY_BUFFER, uv.size() * 4, uv.data(), GL_STATIC_DRAW);
 		vbos["uv"] = UV;
+
+		model = modelMatrix;
 	}
 	~RendererObject() {}
 
@@ -57,8 +59,8 @@ public:
 		glBindVertexArray(defaultVao);
 	}
 	~Renderer() {}
-	void draw(RendererObject ro, Shader& shader);
-	void draw(std::vector<RendererObject>& ro, Shader& shader);
-	void set_currentcamera(Shader& shader, Camera& newCam) const;
+	void draw(RendererObject* ro, Shader* shader);
+	void draw(std::vector<RendererObject>* ro, Shader* shader);
+	void set_currentcamera(Shader* shader, Camera* newCam) const;
 };
 

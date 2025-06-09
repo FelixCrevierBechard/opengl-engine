@@ -36,7 +36,10 @@ public:
 	Object(const char* name, const std::vector<float>& vertices, const std::vector<float>& uv, const std::vector<unsigned int>& indices, const Texture& texture = Texture("Default.png", GL_RGBA));
 	~Object();
 
-	RendererObject parse() { return RendererObject(mesh.indices, mesh.vertices, mesh.uv, material.texture); }
+	RendererObject parse() { 
+		glm::mat4 model = get_model();
+		return RendererObject(mesh.indices, mesh.vertices, mesh.uv, material.texture, model);
+	}
 
 	glm::mat4 get_model() {
 		glm::mat4 model = glm::mat4(1.f);
@@ -49,51 +52,49 @@ public:
 	}
 
 	//STATIC METHODS FOR MERGING OBJECTS
-	static Object merge_objects(const std::vector<Object>& objects, const char* name = "MergedObject")
+	static Object merge_objects(std::vector<Object>* objects, const char* name = "MergedObject")
 	{
 		std::vector<float> vertices = merge_vertices(objects);
 		std::vector<float> uv = MergeUV(objects);
 		std::vector<unsigned int> indices = MergeIndices(objects);
-		return Object(name, vertices, uv, indices, objects[0].material.texture);
+		return Object(name, vertices, uv, indices, objects->front().material.texture);
 	}
-	static Object merge_objects(const std::vector<Object>& objects, const Texture& texture, const char* name = "MergedObject")
+	static Object merge_objects(std::vector<Object>* objects, const Texture& texture, const char* name = "MergedObject")
 	{
 		std::vector<float> vertices = merge_vertices(objects);
 		std::vector<float> uv = MergeUV(objects);
 		std::vector<unsigned int> indices = MergeIndices(objects);
 		return Object(name, vertices, uv, indices, texture);
 	}
-	static std::vector<float> merge_vertices(const std::vector<Object>& objects)
+	static std::vector<float> merge_vertices(std::vector<Object>* objects)
 	{
 		std::vector<float> vertices;
-		for (const auto& obj : objects)
+		for (auto& obj : *objects)
 		{
-			for (int i = 0; i < obj.mesh.vertices.size(); ++i)
+			for (int i = 0; i < obj.mesh.vertices.size(); i += 3)
 			{
-				if(i % 3 == 0)
-					vertices.push_back(obj.mesh.vertices[i] + obj.transform.Positon.x);
-				else if (i % 3 == 1)
-					vertices.push_back(obj.mesh.vertices[i] + obj.transform.Positon.y);
-				else
-					vertices.push_back(obj.mesh.vertices[i] + obj.transform.Positon.z);
+				glm::vec4 tranformedVertex = obj.get_model() * glm::vec4(obj.mesh.vertices[i], obj.mesh.vertices[i +1], obj.mesh.vertices[i + 2], 1.f);
+				vertices.push_back(tranformedVertex.x);
+				vertices.push_back(tranformedVertex.y);
+				vertices.push_back(tranformedVertex.z);
 			}
 		}
 		return vertices;
 	}
-	static std::vector<float> MergeUV(const std::vector<Object>& objects)
+	static std::vector<float> MergeUV(const std::vector<Object>* objects)
 	{
 		std::vector<float> uv;
-		for (const auto& obj : objects)
+		for (const auto& obj : *objects)
 		{
 			uv.insert(uv.end(), obj.mesh.uv.begin(), obj.mesh.uv.end());
 		}
 		return uv;
 	}
-	static std::vector<unsigned int> MergeIndices(const std::vector<Object>& objects)
+	static std::vector<unsigned int> MergeIndices(const std::vector<Object>* objects)
 	{
 		std::vector<unsigned int> indices;
 		unsigned int offset = 0;
-		for (const auto& obj : objects)
+		for (const auto& obj : *objects)
 		{
 			for (int i = 0; i < obj.mesh.indices.size(); ++i)
 			{
